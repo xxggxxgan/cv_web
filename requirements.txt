@@ -1,6 +1,6 @@
 Flask
 gunicorn
-werkzeug.utils
+werkzeug
 os
 cv2
 time
