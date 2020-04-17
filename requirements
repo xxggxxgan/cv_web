@@ -1,0 +1,14 @@
+Flask
+gunicorn
+secure_filename
+os
+cv2
+time
+sys
+requests
+matplotlib.pyplot 
+Image
+BytesIO
+realtime
+json
+gunicorn
