@@ -57,8 +57,8 @@ def upload():
 
 @app.route('/func', methods=['GET', 'POST'])
 def runapp():
-    result = json.dumps(realtime.hh("static/images/sbb.png"),ensure_ascii=False)
-    return result
+    #result = json.dumps(realtime.hh("static/images/sbb.png"),ensure_ascii=False)
+    return "sfsafassafsad"
 
 
 
