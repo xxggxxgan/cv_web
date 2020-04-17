@@ -1,6 +1,6 @@
 Flask
 gunicorn
-secure_filename
+werkzeug.utils
 os
 cv2
 time
