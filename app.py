@@ -29,7 +29,7 @@ def allowed_file(filename):
 
 app = Flask(__name__)
 
-
+"""
 @app.route('/upload', methods=['POST', 'GET'])  # 添加路由
 def upload():
     if request.method == 'POST':
@@ -59,7 +59,7 @@ def upload():
 def runapp():
     #result = json.dumps(realtime.hh("static/images/sbb.png"),ensure_ascii=False)
     return "sfsafassafsad"
-
+"""
 
 
 
