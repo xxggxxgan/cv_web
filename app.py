@@ -26,7 +26,7 @@ def allowed_file(filename):
 app = Flask(__name__)
 
 
-@app.route('/upload', methods=['POST', 'GET'])  # 添加路由
+@app.route('/', methods=['POST', 'GET'])  # 添加路由
 def upload():
     if request.method == 'POST':
         f = request.files['file']
@@ -45,8 +45,9 @@ def upload():
         # 使用Opencv转换一下图片格式和名称
         img = cv2.imread(upload_path)
         cv2.imwrite(os.path.join(basepath, 'static/images', 'test.jpg'), img)
- 
-        return render_template('upload_ok.html',userinput=user_input,val1=time.time())
+        result = json.dumps(realtime.hh("static/images/test.jpg"),ensure_ascii=False)
+        print(result)
+        return render_template('upload_ok.html',userinput=result,val1=time.time())
     
     return render_template('upload.html')
 
@@ -58,10 +59,10 @@ def runapp():
 
 
 
-
+'''
 @app.route("/")
 def home():
     return "hello flask"
-
+'''
 if __name__ == "__main__":
     app.run()
