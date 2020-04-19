@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 import time
-import cv2
+#import cv2
 import json
 
 def hh(n):
