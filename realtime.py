@@ -36,11 +36,6 @@ def hh(n):
     a = analysis['description']['captions']
     image_caption = analysis["description"]["captions"][0]["text"].capitalize()
 
-    # Display the image and overlay it with the caption.
-    image = Image.open(BytesIO(image_data))
-    plt.imshow(image)
-    plt.axis("on")
-    _ = plt.title(image_caption, size="x-large", y=-0.1)
 
     return a
 
