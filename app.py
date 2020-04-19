@@ -59,10 +59,10 @@ def runapp():
 
 
 
-'''
-@app.route("/")
+
+@app.route("/ca",methods=['POST', 'GET'])
 def home():
-    return "hello flask"
-'''
+    return render_template('test.html')
+
 if __name__ == "__main__":
     app.run()
