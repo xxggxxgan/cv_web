@@ -1,7 +1,7 @@
 Flask
 gunicorn
 werkzeug
-opencv-python
+opencv-python-headless
 syspath
 requests
 matplotlib
