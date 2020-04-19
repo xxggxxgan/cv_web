@@ -1,19 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response,jsonify
-from werkzeug.utils import secure_filename
-import os
-import cv2
-import time
-import sys
-import requests
-import matplotlib.pyplot as plt
-from PIL import Image
-from io import BytesIO
-import realtime
-import json
-
-
- 
-from datetime import timedelta
+# from werkzeug.utils import secure_filename
+# import os
+# import cv2
+# import time
+# import sys
+# import requests
+# import matplotlib.pyplot as plt
+# from PIL import Image
+# from io import BytesIO
+# import realtime
+# import json
+#from datetime import timedelta
 
 
 """
