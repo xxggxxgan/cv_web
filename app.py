@@ -13,19 +13,19 @@ import json
 from datetime import timedelta
 
 
-"""
+
 #设置允许的文件格式
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'PNG', 'bmp'])
  
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
  
-"""
+
 
 
 app = Flask(__name__)
 
-"""
+
 @app.route('/upload', methods=['POST', 'GET'])  # 添加路由
 def upload():
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def upload():
     
     return render_template('upload.html')
 
-"""
+
 @app.route('/func', methods=['GET', 'POST'])
 def runapp():
     result = json.dumps(realtime.hh("static/images/sbb.png"),ensure_ascii=False)
