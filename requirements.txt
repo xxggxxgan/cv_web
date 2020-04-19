@@ -7,7 +7,3 @@ requests
 matplotlib
 pillow
 gunicorn
-libsm6
-libxrender1
-libfontconfig1
-libice6
