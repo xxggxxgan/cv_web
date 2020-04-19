@@ -10,15 +10,8 @@ import json
 
 def hh(n):
 
-    # Add your Computer Vision subscription key and endpoint to your environment variables.
-    if 'COMPUTER_VISION_SUBSCRIPTION_KEY' in os.environ:
-        subscription_key = os.environ['COMPUTER_VISION_SUBSCRIPTION_KEY']
-    else:
-        print("\nSet the COMPUTER_VISION_SUBSCRIPTION_KEY environment variable.\n**Restart your shell or IDE for changes to take effect.**")
-        sys.exit()
-
-    if 'COMPUTER_VISION_ENDPOINT' in os.environ:
-        endpoint = os.environ['COMPUTER_VISION_ENDPOINT']
+    subscription_key = '938ea817330a492ba05f46acbe82e168'
+    endpoint = 'https://thesisshow.cognitiveservices.azure.com/'    
 
     analyze_url = endpoint + "vision/v2.1/analyze"
 
