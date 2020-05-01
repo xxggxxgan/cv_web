@@ -33,8 +33,9 @@ def hh(n):
     analysis = response.json()
     #print(analysis)
     #print(analysis['description']['captions'])
-    a = analysis['description']['captions']
-    image_caption = analysis["description"]["captions"][0]["text"].capitalize()
+    #a = analysis['description']['captions']
+    a = analysis['description']['tags']
+    #image_caption = analysis["description"]["captions"][0]["text"].capitalize()
 
 
     return a

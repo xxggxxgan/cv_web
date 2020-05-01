@@ -14,6 +14,8 @@ from datetime import timedelta
 import base64
 import numpy as np
 import re
+from datetime import timedelta
+import picadd
 
 
 
@@ -28,89 +30,42 @@ def allowed_file(filename):
 
 
 app = Flask(__name__)
-
-
-
-
-
-
-@app.route('/bb')
-def hello_world():
-    return """
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
-    <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap Photo</button>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    </body>
-    <script>
-
-    var video = document.getElementById('video');
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-            //video.src = window.URL.createObjectURL(stream);
-            video.srcObject = stream;
-            video.play();
-        });
-    }
-
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    var video = document.getElementById('video');
-
-    // Trigger photo take
-    document.getElementById("snap").addEventListener("click", function() {
-        context.drawImage(video, 0, 0, 640, 480);
-        var dataURL = canvas.toDataURL();
-        console.log(dataURL);
-    $.ajax({
-  type: "POST",
-  url: "/submit",
-  data:{
-    imageBase64: dataURL
-  }
-}).done(function() {
-  console.log('sent');
-});
-
-
-    });
-
-
-
-</script>
-</html>
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1) 
+@app.after_request
+def add_header(r):
     """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_image():
     if request.method == 'POST':
         imgData = base64.b64decode(request.form['imgdata'].replace('data:image/png;base64,', ''))
-        finename=str(int(round(time.time() * 1000))) + '.jpg'
+        #finename=str(int(round(time.time() * 1000))) + '.jpg'
+        finename = "newcapture.jpg"
         file = open(finename, 'wb')
+        #file = open("newcapture.jpg", 'wb')
         file.write(imgData)
         file.close()
-        return json.dumps(realtime.hh(finename),ensure_ascii=False)
+        #result = json.dumps(realtime.hh("newcapture.jpg"),ensure_ascii=False)
+        return redirect(url_for('foo'))
     else:
          return render_template("test3.html")
 
 
-@app.route('/hook', methods=['POST'])
-def disp_pic():
-    data = request.data
-    encoded_data = data.split(',')[1]
-    nparr = np.fromstring(encoded_data.decode('base64'), np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    cv2.imshow(img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-
+@app.route('/foo')
+def foo():
+    basepath = os.path.dirname(__file__)
+    full_filename = os.path.join(basepath, 'shovon.jpg')
+    json.dumps(realtime.hh("newcapture.jpg"),ensure_ascii=False)
+    picadd.image_compose()
+    return render_template("resultt.html", user_image = "./static/images/final.jpg")
 
 
 @app.route('/a', methods=['POST', 'GET'])  # 添加路由
