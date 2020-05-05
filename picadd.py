@@ -70,7 +70,7 @@ def image_final(gender,commonlist,text,date):
                             count += 1
     #to_image.resize((900,1200),Image.ANTIALIAS)
     font = ImageFont.truetype('./static/Carneys Gallery.ttf',280)
-    font2 = ImageFont.truetype('./static/Carneys Gallery.ttf',100)
+    font2 = ImageFont.truetype('./static/Carneys Gallery.ttf',120)
     draw = ImageDraw.Draw(to_image)
     
     draw.text((160,6020),date, fill=(0,0,0),font=font)
