@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 import random
 
+
+COLOR_PATH = './static/color'
 COVER_PATH = './static/cover'
 IMAGES_PATH = './static/img'  # 图片集地址
 IMAGES_FORMAT = ['.jpg', '.JPG']  # 图片格式
@@ -43,6 +45,8 @@ image_names = image_names[0:9]
 to_image = Image.new('RGB', (5007, 6676),(255,255,255))
 coverlist = ['layer1.png','layer2.png','layer3.png','layer4.png','layer5.png','layer6.png','layer7.png','layer8.png','layer9.png']
 
+colorlist = ['color1.png','color2.png','color3.png','color4.png','color5.png','color6.png','color7.png','color8.png','color9.png']
+
 def image_final(gender,commonlist,text,date):
     if(gender == 'male'):
         imgm.resize((3338,3338),Image.ANTIALIAS)
@@ -52,9 +56,14 @@ def image_final(gender,commonlist,text,date):
         to_image.paste(imgw,(0,3338))
     count = 0
     random.shuffle(coverlist)
+    random.shuffle(colorlist)
     print('cover we use is ',coverlist[0])
+    print('color we use is ',colorlist[0])
     tocover = Image.open(COVER_PATH + "/" +coverlist[0]).resize(
                                 to_image.size,Image.ANTIALIAS)
+
+    tocolor = Image.open(COLOR_PATH + "/" +colorlist[0]).resize(
+                                to_image.size,Image.ANTIALIAS)                         
 
     for y in range(0, IMAGE_ROW ):
         for x in range(0, IMAGE_COLUMN ):
@@ -79,6 +88,7 @@ def image_final(gender,commonlist,text,date):
     #imgcover.resize(to_image.size,Image.ANTIALIAS)
     #to_image.paste(imgcover,mask = imgcover)
     to_image.paste(tocover,mask = tocover)
+    to_image.paste(tocolor,mask = tocolor)
     return to_image.save(IMAGE_SAVE_PATH) 
     #return sd.save(IMAGE_SAVE_PATH)
 
