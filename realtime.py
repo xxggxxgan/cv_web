@@ -34,7 +34,8 @@ def hh(n):
     #print(analysis)
     #print(analysis['description']['captions'])
     #a = analysis['description']['captions']
-    a = analysis['description']['tags']
+    #a = analysis['description']['tags']
+    a = analysis
     #image_caption = analysis["description"]["captions"][0]["text"].capitalize()
 
 

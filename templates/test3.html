@@ -52,8 +52,8 @@
         context.drawImage(video, 0, 0, 500, 400);
         var dataURL = canvas.toDataURL();
         var temp = document.createElement("form");    
-        //temp.action = "http://127.0.0.1:5000/";
-        temp.action = "https://zya-testone.herokuapp.com/";
+        temp.action = "http://127.0.0.1:5000/";
+        //temp.action = "https://zya-testone.herokuapp.com/";
         temp.method = "post";     
         temp.style.display = "none";
         var opt = document.createElement("textarea");

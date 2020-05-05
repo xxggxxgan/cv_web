@@ -16,17 +16,18 @@ import numpy as np
 import re
 from datetime import timedelta
 import picadd
+import datetime
 
 
-
+#材料库中拥有的所有照片的名字
+ultList = ['wearing', 'posing', 'young', 'curious', 'shirt', 'smiling', 'hand', 'food', 'holding', 'sitting', 'laptop', 'computer', 'clothing', 'looking', 'indoor', 'glass', 'camera', 'table', 'donut', 'front', 'drinking', 'glasses']
 
 #设置允许的文件格式
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'PNG', 'bmp'])
- 
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
  
-
 
 
 app = Flask(__name__)
@@ -53,7 +54,11 @@ def upload_image():
         #file = open("newcapture.jpg", 'wb')
         file.write(imgData)
         file.close()
-        #result = json.dumps(realtime.hh("newcapture.jpg"),ensure_ascii=False)
+        #result = json.loads(str(json.dumps(realtime.hh("newcapture.jpg"),ensure_ascii=False)))
+        result = realtime.hh("newcapture.jpg")
+        getTag = result['description']['tags'] 
+        print(getTag)
+        #return result
         return redirect(url_for('foo'))
     else:
          return render_template("test3.html")
@@ -61,10 +66,38 @@ def upload_image():
 
 @app.route('/foo')
 def foo():
+    gender = ''
     basepath = os.path.dirname(__file__)
-    full_filename = os.path.join(basepath, 'shovon.jpg')
-    json.dumps(realtime.hh("newcapture.jpg"),ensure_ascii=False)
-    picadd.image_compose()
+    result = realtime.hh("newcapture.jpg")
+    getTag = result['description']['tags']
+    text = result['description']['captions'][0]['text']
+    today = str(datetime.datetime.now().strftime('%b %d, %Y'))
+    print(text)
+    print(today)
+    print("all we get is ",getTag)
+
+    # for i in range(len(getTag)):
+    #     if getTag[i] == 'boy':
+    #         getTag[i] = 'man'
+    #     if getTag[i] == 'lady':
+    #         getTag[i] = 'woman'
+    #     if getTag[i] == 'girl':
+    #         getTag[i] = 'woman'
+    if 'man' in getTag and 'woman' in getTag:
+        h1 = getTag.index('man')
+        h2 = getTag.index('woman')
+        if(h1<h2):
+            gender = 'male'
+        else:
+            gender = 'female'
+    lst3 = [value for value in getTag if value in ultList]
+    print("common list we get is ",lst3)
+    lst3 = lst3[0:9]
+    while len(lst3)<9:
+        lst3.append('curious')
+    outPut = [name + ".jpg" for name in lst3]
+    #print(outPut)
+    picadd.image_final(gender,outPut,text,today)
     return render_template("resultt.html", user_image = "./static/images/final.jpg")
 
 
